@@ -1,10 +1,7 @@
 # IMPORT DATA
-
-library(readxl)
-library(tidyverse)
-qvals <- read_excel("pvals_results.xlsx") %>% select(id = original_sorting_order, pval, qval = bh95_qval)
-qvals_sharp <- read_excel("pvals_results_sharpened.xlsx") %>% select(id = original_sorting_order, qval_sharp = bky06_qval)
-test_data <- full_join(qvals, qvals_sharp, by = "id")
+qvals <- readxl::read_excel("pvals_results.xlsx") %>% dplyr::select(id = original_sorting_order, pval, qval = bh95_qval)
+qvals_sharp <- readxl::read_excel("pvals_results_sharpened.xlsx") %>% dplyr::select(id = original_sorting_order, qval_sharp = bky06_qval)
+test_data <- dplyr::full_join(qvals, qvals_sharp, by = "id")
 
 # test_that("multiplication works", {
 #   expect_equal(2 * 2, 4)
