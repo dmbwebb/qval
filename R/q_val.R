@@ -20,6 +20,7 @@ q_val <- function(p_vals, q_res = 0.001, sharpened = TRUE) {
   # UNSHARPENED
   if (!sharpened) {
     q_val_df <- tibble::tibble(
+      val_id = rep(1:length(p_vals), times = length(q_vals)),
       p = rep(p_vals, times = length(q_vals)),
       rank_p = rep(rank_p, times = length(q_vals)),
       q = rep(q_vals, each = length(p_vals))
@@ -30,8 +31,8 @@ q_val <- function(p_vals, q_res = 0.001, sharpened = TRUE) {
         reject_rank = reject_temp * rank_p
       ) %>%
       dplyr::group_by(q) %>%
-      dplyr::mutate(reject_final = rank_p <= max(reject_rank)) %>%
-      dplyr::ungroup
+      dplyr::mutate(reject = rank_p <= max(reject_rank)) %>%
+      dplyr::ungroup()
   } else if (sharpened) {
     q_val_df <- tibble::tibble(
       val_id = rep(1:length(p_vals), times = length(q_vals)),
@@ -48,7 +49,7 @@ q_val <- function(p_vals, q_res = 0.001, sharpened = TRUE) {
       dplyr::group_by(q) %>%
       dplyr::mutate(reject_final = rank_p <= max(reject_rank),
              n_hyp_rejected = sum(reject_final)) %>%
-      dplyr::ungroup %>%
+      dplyr::ungroup() %>%
 
       # Sharpened second step
       dplyr::mutate(
@@ -62,7 +63,7 @@ q_val <- function(p_vals, q_res = 0.001, sharpened = TRUE) {
       ) %>%
       dplyr::group_by(q) %>%
       dplyr::mutate(reject_final_sharp = rank_p <= max(reject_rank_sharp)) %>%
-      dplyr::ungroup %>%
+      dplyr::ungroup() %>%
       # Choose which reject to return
       dplyr::mutate(reject = dplyr::if_else(n_hyp_rejected == 0, reject_final, reject_final_sharp),
              reject = dplyr::if_else(q == 1, TRUE, reject)) # always reject at 1

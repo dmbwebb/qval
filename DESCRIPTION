@@ -13,3 +13,5 @@ Imports:
     dplyr,
     data.table,
     tibble
+Suggests: 
+    testthat
