@@ -14,3 +14,5 @@ Imports:
     tibble
 Suggests: 
     testthat
+URL: https://github.com/dmbwebb/qval
+BugReports: https://github.com/dmbwebb/qval/issues
