@@ -15,10 +15,10 @@ p-values of your results to account for the fact that you’ve run
 multiple hypotheses. This package takes a vector of p-values, and
 outputs a vector of ‘’q-values’‘, in the style of [Anderson
 (2008)](https://www.tandfonline.com/doi/abs/10.1198/016214508000000841).
-Rejecting q-values below a threshold, say \(\alpha = 0.05\), will
-control for the’‘false-discovery rate’’ (FDR). In other words, the
-probability that a given significant result is a false positive will be
-equal to or less than \(\alpha\).
+Rejecting q-values below a threshold, say alpha = 0.05, will control for
+the’‘false-discovery rate’’ (FDR). In other words, the probability that
+a given significant result is a false positive will then be equal to or
+less than 0.05.
 
 ## Installation
 
