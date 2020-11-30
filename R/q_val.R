@@ -15,6 +15,8 @@ q_val <- function(p_vals, q_res = 0.001, sharpened = TRUE) {
 
   q_vals <- seq(0, 1, q_res)
 
+  `%>%` <- dplyr::`%>%`
+
   # print("Computing sharpened q-value set")
 
   # UNSHARPENED
